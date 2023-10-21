@@ -45,6 +45,7 @@ const note = () => {
       handle: deleteNoteMutation.mutate,
       backgroundColor: "#F14E4E",
       text: "Delete",
+      disabled: deleteNoteMutation.isLoading,
     },
   ];
 

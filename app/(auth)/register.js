@@ -13,44 +13,43 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [errors, setErrors] = useState({}); 
+  const [errors, setErrors] = useState({});
   const router = useRouter();
 
   const { onRegister } = useSession();
 
   const handleError = (errorMessage, input) => {
-    setErrors(prevState => ({...prevState, [input]:errorMessage}));
+    setErrors((prevState) => ({ ...prevState, [input]: errorMessage }));
   };
-  const RegisterValidator = new Validator(handleError)
+  const RegisterValidator = new Validator(handleError);
 
   const handler = async () => {
-    setErrors({})
-    let valPassword = RegisterValidator.validatePassword(password, 'Password')
-    let valUsername = RegisterValidator.ValidateName(username, 'Username')   
-    let valFirstName = RegisterValidator.ValidateName(firstName, 'First name')
-    let valLastName = RegisterValidator.ValidateName(lastName, 'Last name')
+    setErrors({});
+    let valPassword = RegisterValidator.validatePassword(password, "Password");
+    let valUsername = RegisterValidator.ValidateName(username, "Username");
+    let valFirstName = RegisterValidator.ValidateName(firstName, "First name");
+    let valLastName = RegisterValidator.ValidateName(lastName, "Last name");
     if (valFirstName && valLastName && valPassword && valUsername) {
-        try {
-          setIsModalVisible(true);
-          const result = await onRegister({
-            firstName,
-            lastName,
-            username,
-            password,
-          });
-          if (result && result.error) {
-            setIsModalVisible(false);
-            alert(result.msg);
-            return;
-          }
-    
+      try {
+        setIsModalVisible(true);
+        const result = await onRegister({
+          firstName,
+          lastName,
+          username,
+          password,
+        });
+        if (result && result.error) {
           setIsModalVisible(false);
-          router.replace("/login");
-        } catch (error) {
-          console.log(error);
+          alert(result.msg);
+          return;
         }
+
+        setIsModalVisible(false);
+        router.replace("/login");
+      } catch (error) {
+        console.log(error);
       }
-   
+    }
   };
 
   const dataForm = {

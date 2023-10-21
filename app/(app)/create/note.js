@@ -51,6 +51,7 @@ const note = () => {
       handle: handle,
       backgroundColor: "black",
       text: "Save",
+      disabled: createNoteMutation.isLoading,
     },
   ];
 

@@ -11,38 +11,37 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [errors, setErrors] = useState({}); 
+  const [errors, setErrors] = useState({});
   const { onLogin } = useSession();
 
   const handleError = (errorMessage, input) => {
-    setErrors(prevState => ({...prevState, [input]:errorMessage}));
-  }
+    setErrors((prevState) => ({ ...prevState, [input]: errorMessage }));
+  };
 
-const LoginValidator = new Validator(handleError) 
+  const LoginValidator = new Validator(handleError);
 
   const handler = async () => {
-    setErrors({})
-   let valUsername =  LoginValidator.ValidateName(username, 'Username')   
-   let valPassword = LoginValidator.validatePassword(password, 'Password')
+    setErrors({});
+    let valUsername = LoginValidator.ValidateName(username, "Username");
+    let valPassword = LoginValidator.validatePassword(password, "Password");
 
     if (valPassword && valUsername) {
-    try {
-      setIsModalVisible(true);
-      const result = await onLogin({ username, password });
+      try {
+        setIsModalVisible(true);
+        const result = await onLogin({ username, password });
 
-      if (result.error) {
+        if (result.error) {
+          setIsModalVisible(false);
+          alert(result.msg);
+          return;
+        }
+
         setIsModalVisible(false);
-        alert(result.msg);
-        return;
+        router.replace("/");
+      } catch (error) {
+        console.log(error);
       }
-
-      setIsModalVisible(false);
-      router.replace("/");
-    } catch (error) {
-      console.log(error);
-    }  
     }
-    
   };
 
   const dataForm = {

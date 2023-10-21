@@ -31,6 +31,7 @@ const folder = () => {
       handle: deleteFolderMutation.mutate,
       backgroundColor: "#F14E4E",
       text: "Delete",
+      disabled: deleteFolderMutation.isLoading,
     },
   ];
 

@@ -10,6 +10,7 @@ const HeaderRight = ({ buttons = [] }) => {
           key={idx}
           onPress={button.handle}
           style={styles.button(button)}
+          disabled={button.disabled}
         >
           <Text style={styles.buttonText}>{button.text}</Text>
         </TouchableOpacity>
