@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Notive",
+    "slug": "Notive",
+    "scheme": "acme",
+    "version": "1.0.0",
+    "web": {
+      "bundler": "metro"
+    },
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e66e55d0-d269-4240-b07f-e7589b94fe8a"
+      }
+    },
+    "android": {
+      "package": "com.diegoarf.notiveapp"
+    }
+  }
+}
